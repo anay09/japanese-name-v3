@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request
 
 app = Flask(__name__)
 
@@ -35,13 +35,12 @@ alphabet_map = {
 
 @app.route("/")
 def index():
-    inp_name = input("What is your name : ")
+    return render_template("index.html")
+
+
+@app.route("/output", methods=["POST"])
+def output():
+    name = request.form.get("name")
     output_name = list()
-    [output_name.append(alphabet_map[i.upper()]) for i in inp_name]
-    return('Original Name: {i}, Translated Name: {o}'.format(
-          o=''.join(output_name),
-          i=inp_name)
-    )
-
-
-
+    [output_name.append(alphabet_map[i.upper()]) for i in name]
+    return render_template("output.html", name=name, output_name=output_name)
