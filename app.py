@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, render_template
 
 app = Flask(__name__)
 
@@ -35,10 +35,13 @@ alphabet_map = {
 
 @app.route("/")
 def index():
-    inp_name = 'Anay'
+    inp_name = input("What is your name : ")
     output_name = list()
     [output_name.append(alphabet_map[i.upper()]) for i in inp_name]
     return('Original Name: {i}, Translated Name: {o}'.format(
           o=''.join(output_name),
           i=inp_name)
     )
+
+
+
