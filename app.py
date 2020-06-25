@@ -1,3 +1,8 @@
+from flask import Flask
+
+app = Flask(__name__)
+
+
 alphabet_map = {
     'A': 'ka',
     'B': 'tu',
@@ -27,10 +32,13 @@ alphabet_map = {
     'Z': 'zi',
 }
 
-inp_name = 'Anay'
-output_name = list()
-[output_name.append(alphabet_map[i.upper()]) for i in inp_name]
-print('Original Name: {i}, Translated Name: {o}'.format(
-        o=''.join(output_name),
-        i=inp_name)
-)
+
+@app.route("/")
+def index():
+    inp_name = 'Anay'
+    output_name = list()
+    [output_name.append(alphabet_map[i.upper()]) for i in inp_name]
+    return('Original Name: {i}, Translated Name: {o}'.format(
+          o=''.join(output_name),
+          i=inp_name)
+    )
